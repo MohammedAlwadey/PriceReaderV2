@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:padding="32dp"
+    android:background="#F0F4FF">
+
+    <ImageView
+        android:layout_width="88dp"
+        android:layout_height="88dp"
+        android:src="@mipmap/ic_launcher"
+        android:layout_marginBottom="16dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="قارئ الأسعار"
+        android:textSize="28sp"
+        android:textStyle="bold"
+        android:textColor="#0D47A1"
+        android:layout_marginBottom="8dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="أدخل رابط الموقع مرة واحدة فقط"
+        android:textSize="14sp"
+        android:textColor="#666"
+        android:layout_marginBottom="32dp"/>
+
+    <EditText
+        android:id="@+id/etUrl"
+        android:layout_width="match_parent"
+        android:layout_height="54dp"
+        android:hint="https://example.com"
+        android:inputType="textUri"
+        android:background="@drawable/input_bg"
+        android:paddingHorizontal="16dp"
+        android:textSize="15sp"
+        android:layout_marginBottom="16dp"/>
+
+    <Button
+        android:id="@+id/btnConfirm"
+        android:layout_width="match_parent"
+        android:layout_height="54dp"
+        android:text="فتح الموقع"
+        android:textSize="16sp"
+        android:backgroundTint="#1565C0"
+        android:textColor="#FFFFFF"/>
+
+</LinearLayout>
