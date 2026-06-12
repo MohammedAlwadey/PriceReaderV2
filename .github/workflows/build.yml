@@ -1,4 +1,4 @@
-name: Build Play Release
+name: Build AAB
 
 on:
   push:
@@ -24,7 +24,7 @@ jobs:
         run: yes | sdkmanager --licenses || true
 
       - name: Install SDK
-        run: sdkmanager "platforms;android-35" "build-tools;35.0.0"
+        run: sdkmanager "platforms;android-34" "build-tools;34.0.0"
 
       - name: Setup Gradle
         uses: gradle/actions/setup-gradle@v4
@@ -32,12 +32,11 @@ jobs:
           gradle-version: '8.4'
 
       - name: Decode Keystore
-        run: |
-          echo "${{ secrets.KEYSTORE_BASE64 }}" | base64 -d > pricereader.keystore
+        run: echo "${{ secrets.KEYSTORE_BASE64 }}" | base64 -d > pricereader.keystore
 
-      - name: Build Release AAB and APK
+      - name: Build Release AAB
         run: |
-          gradle bundleRelease assembleRelease --no-daemon \
+          gradle bundleRelease --no-daemon \
             -Pandroid.injected.signing.store.file=$PWD/pricereader.keystore \
             -Pandroid.injected.signing.store.password=${{ secrets.KEYSTORE_PASSWORD }} \
             -Pandroid.injected.signing.key.alias=${{ secrets.KEY_ALIAS }} \
@@ -45,16 +44,9 @@ jobs:
         env:
           ANDROID_HOME: ${{ env.ANDROID_SDK_ROOT }}
 
-      - name: Upload Play AAB
+      - name: Upload AAB
         uses: actions/upload-artifact@v4
         with:
-          name: PriceReader-Release-AAB
+          name: PriceReader-AAB
           path: app/build/outputs/bundle/release/app-release.aab
-          if-no-files-found: error
-
-      - name: Upload Release APK
-        uses: actions/upload-artifact@v4
-        with:
-          name: PriceReader-Release-APK
-          path: app/build/outputs/apk/release/app-release.apk
           if-no-files-found: error
