@@ -1,4 +1,5 @@
 package com.pricereader
+import android.webkit.PermissionRequest
 
 import android.annotation.SuppressLint
 import android.content.Context
@@ -57,6 +58,11 @@ class MainActivity : AppCompatActivity() {
         binding.webView.webChromeClient = object : WebChromeClient() {
             override fun onProgressChanged(v: WebView, p: Int) {
                 binding.progress.progress = p
+            }
+        
+            // ✅ السماح للموقع باستخدام الكاميرا
+            override fun onPermissionRequest(request: PermissionRequest) {
+                request.grant(request.resources)
             }
         }
 
